@@ -92,7 +92,8 @@ class NothingGlyphInterface {
   ///
   /// Limited to D1 only for [GlyphPhone1].
   Future<void> displayProgress(int progress, {bool reverse = false}) {
-    return NothingGlyphInterfacePlatform.instance.displayProgress(progress, reverse: reverse);
+    return NothingGlyphInterfacePlatform.instance
+        .displayProgress(progress, reverse: reverse);
   }
 
   /// Used to simultaneously toggle all Glyphs except C1 / D1 and display the progress value on C1 / D1.
@@ -101,6 +102,7 @@ class NothingGlyphInterface {
   ///
   /// Limited to D1 only for [GlyphPhone1].
   Future<void> displayProgressAndToggle(int progress, {bool reverse = false}) {
-    return NothingGlyphInterfacePlatform.instance.displayProgressAndToggle(progress, reverse: reverse);
+    return NothingGlyphInterfacePlatform.instance
+        .displayProgressAndToggle(progress, reverse: reverse);
   }
 }

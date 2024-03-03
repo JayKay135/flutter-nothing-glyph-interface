@@ -5,11 +5,13 @@ import 'package:nothing_glyph_interface/nothing_glyph_interface_method_channel.d
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelNothingGlyphInterface platform = MethodChannelNothingGlyphInterface();
+  MethodChannelNothingGlyphInterface platform =
+      MethodChannelNothingGlyphInterface();
   const MethodChannel channel = MethodChannel('nothing_glyph_interface');
 
   setUp(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
       channel,
       (MethodCall methodCall) async {
         return '42';
@@ -18,7 +20,8 @@ void main() {
   });
 
   tearDown(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, null);
   });
 
   test('getPlatformVersion', () async {

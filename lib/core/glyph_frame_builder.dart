@@ -58,7 +58,7 @@ class GlyphFrameBuilder {
   }
 
   /// Create the instance of the GlyphFrame.
-  List<Map<String, dynamic>> build() {
+  List<Map<String, int?>> build() {
     return _operations;
   }
 }

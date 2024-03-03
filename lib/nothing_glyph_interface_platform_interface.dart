@@ -8,7 +8,8 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static NothingGlyphInterfacePlatform _instance = MethodChannelNothingGlyphInterface();
+  static NothingGlyphInterfacePlatform _instance =
+      MethodChannelNothingGlyphInterface();
 
   /// The default instance of [NothingGlyphInterfacePlatform] to use.
   ///
@@ -78,6 +79,7 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
   }
 
   Future<void> displayProgressAndToggle(int progress, {bool reverse = false}) {
-    throw UnimplementedError('displayProgressAndToggle() has not been implemented.');
+    throw UnimplementedError(
+        'displayProgressAndToggle() has not been implemented.');
   }
 }

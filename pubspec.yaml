@@ -1,10 +1,10 @@
 name: nothing_glyph_interface
-description: "Plugin to control the glyph interface of Nothing Phones."
-version: 0.0.1
+description: "Plugin to control the glyph interface of Nothing Phones for Flutter Android applications."
+version: 0.0.2
 homepage: https://github.com/JayKay135/flutter-nothing-glyph-interface
 
 environment:
-  sdk: ">=3.4.0-99.1.beta <4.0.0"
+  sdk: ">=3.2.0 <4.0.0"
   flutter: ">=3.3.0"
 
 dependencies:

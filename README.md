@@ -5,6 +5,10 @@
 
 Flutter implementation of the [Glyph Developer Kit](https://github.com/Nothing-Developer-Programme/Glyph-Developer-Kit) from Nothing.
 
+## Legal Notice
+I don't stand in any connection with [Nothing](https://nothing.tech) and own any rights to their physical and digital products.
+The included jar file is the property of [Nothing](https://nothing.tech).
+
 ## Note
 For this plugin to work properly on physical Nothing devices, the glyph debugging must be enabled first:
 ```bash
@@ -55,7 +59,10 @@ Please use the provided `GlyphFrameBuilder` to create Glyph frames:
 
 ```dart
 // basic example
-await _glyphInterfacePlugin.buildGlyphFrame(GlyphFrameBuilder().buildChannelA());
+await _glyphInterfacePlugin.buildGlyphFrame(GlyphFrameBuilder()
+    .buildChannelA()
+    .build()
+);
 
 // more complex example
 await _glyphInterfacePlugin.buildGlyphFrame(GlyphFrameBuilder()
@@ -64,6 +71,7 @@ await _glyphInterfacePlugin.buildGlyphFrame(GlyphFrameBuilder()
     .buildPeriod(2000)
     .buildCycles(3)
     .buildInterval(1000)
+    .build()
 );
 ```
 

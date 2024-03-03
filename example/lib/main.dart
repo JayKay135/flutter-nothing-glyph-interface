@@ -16,46 +16,62 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _nothingGlyphInterfacePlugin = NothingGlyphInterface();
+  late NothingGlyphInterface _glyphInterfacePlugin;
 
   @override
   void initState() {
+    _glyphInterfacePlugin = NothingGlyphInterface();
+
     super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await _nothingGlyphInterfacePlugin.getPlatformVersion() ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FutureBuilder(
+                future: _glyphInterfacePlugin.is20111(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+
+                  return Text('Is Nothing Phone 1: ${snapshot.data}',
+                      textAlign: TextAlign.center);
+                },
+              ),
+              FutureBuilder(
+                future: _glyphInterfacePlugin.is22111(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+
+                  return Text('Is Nothing Phone 2: ${snapshot.data}',
+                      textAlign: TextAlign.center);
+                },
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () async {
+                  await _glyphInterfacePlugin.buildGlyphFrame(
+                      GlyphFrameBuilder()
+                          .buildChannelA()
+                          .buildChannel(NothingPhone2.c3)
+                          .buildPeriod(2000)
+                          .buildCycles(3)
+                          .buildInterval(1000)
+                          .build());
+                  await _glyphInterfacePlugin.animate();
+                },
+                child: const Text("Test"),
+              ),
+            ],
+          ),
         ),
       ),
     );
