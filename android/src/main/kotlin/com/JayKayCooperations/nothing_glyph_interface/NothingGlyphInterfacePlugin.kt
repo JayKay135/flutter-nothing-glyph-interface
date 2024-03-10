@@ -76,6 +76,7 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 		// Common
 		"is20111" -> result.success(Common.is20111())
 		"is22111" -> result.success(Common.is22111())
+		"is23111" -> result.success(Common.is23111())
 		// Gylph Frame
 		"getPeriod" -> result.success(mFrame?.getPeriod())
 		"getCycles" -> result.success(mFrame?.getCycles())

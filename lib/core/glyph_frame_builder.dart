@@ -61,4 +61,9 @@ class GlyphFrameBuilder {
   List<Map<String, int?>> build() {
     return _operations;
   }
+
+  /// Clears the glyph frame builder operations list.
+  void clear() {
+    _operations.clear();
+  }
 }

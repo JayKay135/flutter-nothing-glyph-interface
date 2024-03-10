@@ -35,6 +35,7 @@ Check if the Android device is a Nothing Phone 1 or Phone 2:
 ```dart
 bool isPhone1 = await _nothingGlyphInterface.is20111();
 bool isPhone2 = await _nothingGlyphInterface.is22111();
+bool isPhone2a = await _nothingGlyphInterface.is23111();
 ```
 
 Listen to the Glyph connection stream.
