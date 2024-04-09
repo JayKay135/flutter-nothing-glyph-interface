@@ -139,6 +139,10 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 				result.error("NULL_FRAME", "mFrame is null", null)
 			}
 		}
+		"turnOff" -> {
+			mGM?.turnOff()
+			result.success(null)
+		}
 		else -> result.notImplemented()
 		}
 	}

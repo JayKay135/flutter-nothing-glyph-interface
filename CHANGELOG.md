@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Added missing turnOff function.
+
 ## 0.0.3
 
 * Added support for Nothing Phone 2a.
