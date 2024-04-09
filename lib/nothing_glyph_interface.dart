@@ -95,7 +95,7 @@ class NothingGlyphInterface {
   ///
   /// [progress] : Value between 0 and 100.
   ///
-  /// Limited to D1 only for [GlyphPhone1].
+  /// Limited to D1 only for [NothingPhone1].
   Future<void> displayProgress(int progress, {bool reverse = false}) {
     return NothingGlyphInterfacePlatform.instance.displayProgress(progress, reverse: reverse);
   }
@@ -104,7 +104,7 @@ class NothingGlyphInterface {
   ///
   /// [progress] : Value between 0 and 100.
   ///
-  /// Limited to D1 only for [GlyphPhone1].
+  /// Limited to D1 only for [NothingPhone1].
   Future<void> displayProgressAndToggle(int progress, {bool reverse = false}) {
     return NothingGlyphInterfacePlatform.instance.displayProgressAndToggle(progress, reverse: reverse);
   }
