@@ -1,6 +1,6 @@
 import 'dart:async';
 
-export '../core/glyph.dart' show NothingPhone1, NothingPhone2;
+export '../core/glyph.dart' show NothingPhone1, NothingPhone2, NothingPhone2a;
 export '../core/glyph_frame_builder.dart' show GlyphFrameBuilder;
 
 import '../core/glyph.dart';
