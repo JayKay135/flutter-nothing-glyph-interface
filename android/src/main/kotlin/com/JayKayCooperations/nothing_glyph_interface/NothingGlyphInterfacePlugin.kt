@@ -153,6 +153,7 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 			override fun onServiceConnected(componentName: ComponentName) {
 				if (Common.is20111()) mGM?.register(Common.DEVICE_20111)
 				if (Common.is22111()) mGM?.register(Common.DEVICE_22111)
+				if (Common.is23111()) mGM?.register(Common.DEVICE_23111)
 
 				try {
 					mGM?.openSession()
