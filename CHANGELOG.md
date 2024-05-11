@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Fixed issue regarding initialization on Phone 2a's
+
 ## 0.0.4
 
 * Added missing turnOff function.
