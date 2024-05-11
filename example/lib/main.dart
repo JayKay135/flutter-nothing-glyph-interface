@@ -55,6 +55,17 @@ class _MyAppState extends State<MyApp> {
                       textAlign: TextAlign.center);
                 },
               ),
+              FutureBuilder(
+                future: _glyphInterfacePlugin.is23111(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+
+                  return Text('Is Nothing Phone 2a: ${snapshot.data}',
+                      textAlign: TextAlign.center);
+                },
+              ),
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () async {
