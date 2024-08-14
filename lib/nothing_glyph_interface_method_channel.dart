@@ -10,11 +10,11 @@ class MethodChannelNothingGlyphInterface extends NothingGlyphInterfacePlatform {
   final methodChannel = const MethodChannel('glyph_interface');
 
   @override
-  void initCallbacks(Function(int connected) serviceConnection) {
+  void initCallbacks(Function(bool connected) serviceConnection) {
     methodChannel.setMethodCallHandler((MethodCall call) async {
       switch (call.method) {
         case 'serviceConnection':
-          serviceConnection(call.arguments as int);
+          serviceConnection(call.arguments);
           break;
 
         default:

@@ -65,7 +65,7 @@ class MockNothingGlyphInterfacePlatform
   }
 
   @override
-  void initCallbacks(Function(int connected) serviceConnection) {
+  void initCallbacks(Function(bool connected) serviceConnection) {
     // TODO: implement initCallbacks
   }
 

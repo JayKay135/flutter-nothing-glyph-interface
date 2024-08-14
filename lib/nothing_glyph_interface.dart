@@ -8,10 +8,11 @@ import 'nothing_glyph_interface_platform_interface.dart';
 
 class NothingGlyphInterface {
   /// The controller to update subscribers about the service connection.
-  final StreamController _onServiceConnectionController = StreamController();
+  final StreamController<bool> _onServiceConnectionController =
+      StreamController<bool>();
 
   /// Subscribable stream to listen for service connection events.
-  Stream get onServiceConnection => _onServiceConnectionController.stream;
+  Stream<bool> get onServiceConnection => _onServiceConnectionController.stream;
 
   NothingGlyphInterface() {
     NothingGlyphInterfacePlatform.instance.initCallbacks(

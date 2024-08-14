@@ -24,7 +24,7 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  void initCallbacks(Function(int connected) serviceConnection) {
+  void initCallbacks(Function(bool connected) serviceConnection) {
     throw UnimplementedError('initCallbacks() has not been implemented.');
   }
 
