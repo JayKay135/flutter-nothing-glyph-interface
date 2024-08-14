@@ -2,6 +2,7 @@ package com.JayKayCooperations.nothing_glyph_interface
 
 import android.content.ComponentName
 import android.os.Build
+import android.content.Context
 import android.util.Log
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
+import kotlinx.coroutines.runBlocking
 
 private const val TAG = "NothingGlyphInterfacePlugin"
 
@@ -40,7 +42,15 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 	}
 
 	override fun onDetachedFromActivity() {
-		activity = null
+        runBlocking {
+			try {
+				mGM?.turnOff()
+			} catch (e: GlyphException) {
+				Log.e(TAG, e.message ?: "Unknown error")
+			} finally {
+				activity = null
+			}
+		}
 	}
 
 	override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -48,26 +58,43 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 	}
 
 	override fun onDetachedFromActivityForConfigChanges() {
-		activity = null
+        runBlocking {
+			try {
+				mGM?.turnOff()
+			} catch (e: GlyphException) {
+				Log.e(TAG, e.message ?: "Unknown error")
+			} finally {
+				activity = null
+			}
+		}
 	}
+	
+	private fun onAttach(applicationContext: Context){
+		init();
+		mGM = GlyphManager.getInstance(applicationContext);
+		mGM?.init(mCallback);
+
+        Log.d(TAG, "Attached to engine.")
+  }
 
 	override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
 		this.flutterPluginBinding = flutterPluginBinding
 
 		channel = MethodChannel(flutterPluginBinding.binaryMessenger, "glyph_interface")
+		onAttach(flutterPluginBinding.applicationContext)
 		channel.setMethodCallHandler(this)
 	}
 
 	override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
 		try {
+			mGM?.turnOff()
 			mGM?.closeSession();
 		} catch (e: GlyphException) {
 			Log.e(TAG, e.message ?: "Unknown error");
+		} finally {
+			mGM?.unInit()
+			channel.setMethodCallHandler(null)
 		}
-
-		mGM?.unInit();
-
-		channel.setMethodCallHandler(null)
 	}
 
 	override fun onMethodCall(call: MethodCall, result: Result) {
@@ -165,6 +192,7 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 			}
 
 			override fun onServiceDisconnected(componentName: ComponentName) {
+				mGM?.turnOff()
 				mGM?.closeSession()
 
     			channel.invokeMethod("serviceConnection", false)
