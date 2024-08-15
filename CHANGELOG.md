@@ -1,3 +1,8 @@
+## 0.0.6
+
+* Fixed the issue of not working `onServiceConnection` stream
+* Resolved issue of still active glyphs with closed applications on Nothing phone 1
+
 ## 0.0.5
 
 * Fixed issue regarding initialization on Phone 2a's
