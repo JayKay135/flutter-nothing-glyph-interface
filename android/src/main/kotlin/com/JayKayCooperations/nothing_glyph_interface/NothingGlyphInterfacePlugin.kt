@@ -104,6 +104,7 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 		"is20111" -> result.success(Common.is20111())
 		"is22111" -> result.success(Common.is22111())
 		"is23111" -> result.success(Common.is23111())
+		"is23113" -> result.success(Common.is23113())
 		// Gylph Frame
 		"getPeriod" -> result.success(mFrame?.getPeriod())
 		"getCycles" -> result.success(mFrame?.getCycles())
@@ -181,6 +182,7 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 				if (Common.is20111()) mGM?.register(Common.DEVICE_20111)
 				if (Common.is22111()) mGM?.register(Common.DEVICE_22111)
 				if (Common.is23111()) mGM?.register(Common.DEVICE_23111)
+				if (Common.is23113()) mGM?.register(Common.DEVICE_23113);
 
 				try {
 					mGM?.openSession()

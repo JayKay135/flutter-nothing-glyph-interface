@@ -1,6 +1,6 @@
 ## 0.0.7
 
-- Updated KetchumSDK_Community jar
+- Added support for Nothing Phone 2a Plus
 
 ## 0.0.6
 

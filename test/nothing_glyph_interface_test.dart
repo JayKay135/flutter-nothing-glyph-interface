@@ -4,9 +4,7 @@ import 'package:nothing_glyph_interface/nothing_glyph_interface_platform_interfa
 import 'package:nothing_glyph_interface/nothing_glyph_interface_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockNothingGlyphInterfacePlatform
-    with MockPlatformInterfaceMixin
-    implements NothingGlyphInterfacePlatform {
+class MockNothingGlyphInterfacePlatform with MockPlatformInterfaceMixin implements NothingGlyphInterfacePlatform {
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
 
@@ -82,6 +80,12 @@ class MockNothingGlyphInterfacePlatform
   }
 
   @override
+  Future<bool?> is23113() {
+    // TODO: implement is23113
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> toggle() {
     // TODO: implement toggle
     throw UnimplementedError();
@@ -101,8 +105,7 @@ class MockNothingGlyphInterfacePlatform
 }
 
 void main() {
-  final NothingGlyphInterfacePlatform initialPlatform =
-      NothingGlyphInterfacePlatform.instance;
+  final NothingGlyphInterfacePlatform initialPlatform = NothingGlyphInterfacePlatform.instance;
 
   test('$MethodChannelNothingGlyphInterface is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelNothingGlyphInterface>());
@@ -110,8 +113,7 @@ void main() {
 
   test('getPlatformVersion', () async {
     NothingGlyphInterface nothingGlyphInterfacePlugin = NothingGlyphInterface();
-    MockNothingGlyphInterfacePlatform fakePlatform =
-        MockNothingGlyphInterfacePlatform();
+    MockNothingGlyphInterfacePlatform fakePlatform = MockNothingGlyphInterfacePlatform();
     NothingGlyphInterfacePlatform.instance = fakePlatform;
 
     expect(await nothingGlyphInterfacePlugin.getPlatformVersion(), '42');

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:nothing_glyph_interface/nothing_glyph_interface.dart';
 
 void main() {
@@ -40,8 +38,7 @@ class _MyAppState extends State<MyApp> {
                     return const CircularProgressIndicator();
                   }
 
-                  return Text('Is Nothing Phone 1: ${snapshot.data}',
-                      textAlign: TextAlign.center);
+                  return Text('Is Nothing Phone 1: ${snapshot.data}', textAlign: TextAlign.center);
                 },
               ),
               FutureBuilder(
@@ -51,8 +48,7 @@ class _MyAppState extends State<MyApp> {
                     return const CircularProgressIndicator();
                   }
 
-                  return Text('Is Nothing Phone 2: ${snapshot.data}',
-                      textAlign: TextAlign.center);
+                  return Text('Is Nothing Phone 2: ${snapshot.data}', textAlign: TextAlign.center);
                 },
               ),
               FutureBuilder(
@@ -62,21 +58,24 @@ class _MyAppState extends State<MyApp> {
                     return const CircularProgressIndicator();
                   }
 
-                  return Text('Is Nothing Phone 2a: ${snapshot.data}',
-                      textAlign: TextAlign.center);
+                  return Text('Is Nothing Phone 2a: ${snapshot.data}', textAlign: TextAlign.center);
+                },
+              ),
+              FutureBuilder(
+                future: _glyphInterfacePlugin.is23113(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+
+                  return Text('Is Nothing Phone 2a Plus: ${snapshot.data}', textAlign: TextAlign.center);
                 },
               ),
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () async {
                   await _glyphInterfacePlugin.buildGlyphFrame(
-                      GlyphFrameBuilder()
-                          .buildChannelA()
-                          .buildChannel(NothingPhone2.c3)
-                          .buildPeriod(2000)
-                          .buildCycles(3)
-                          .buildInterval(1000)
-                          .build());
+                      GlyphFrameBuilder().buildChannelA().buildChannel(NothingPhone2.c3).buildPeriod(2000).buildCycles(3).buildInterval(1000).build());
                   await _glyphInterfacePlugin.animate();
                 },
                 child: const Text("Test"),

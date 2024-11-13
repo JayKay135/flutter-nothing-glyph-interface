@@ -7,8 +7,7 @@ import '../core/glyph.dart';
 
 class NothingGlyphInterface {
   /// The controller to update subscribers about the service connection.
-  final StreamController<bool> _onServiceConnectionController =
-      StreamController<bool>();
+  final StreamController<bool> _onServiceConnectionController = StreamController<bool>();
 
   /// Subscribable stream to listen for service connection events.
   Stream<bool> get onServiceConnection => _onServiceConnectionController.stream;
@@ -44,6 +43,11 @@ class NothingGlyphInterface {
   /// Returns true if the device is a 23111 aka [NothingPhone2a].
   Future<bool?> is23111() {
     return NothingGlyphInterfacePlatform.instance.is23111();
+  }
+
+  /// Returns true if the device is a 23113 aka [NothingPhone2aPlus].
+  Future<bool?> is23113() {
+    return NothingGlyphInterfacePlatform.instance.is23113();
   }
 
   /// Get the duration of the GlyphFrame is to be turned on, measured in milliseconds.
@@ -97,8 +101,7 @@ class NothingGlyphInterface {
   ///
   /// Limited to D1 only for [NothingPhone1].
   Future<void> displayProgress(int progress, {bool reverse = false}) {
-    return NothingGlyphInterfacePlatform.instance
-        .displayProgress(progress, reverse: reverse);
+    return NothingGlyphInterfacePlatform.instance.displayProgress(progress, reverse: reverse);
   }
 
   /// Used to simultaneously toggle all Glyphs except C1 / D1 and display the progress value on C1 / D1.
@@ -107,8 +110,7 @@ class NothingGlyphInterface {
   ///
   /// Limited to D1 only for [NothingPhone1].
   Future<void> displayProgressAndToggle(int progress, {bool reverse = false}) {
-    return NothingGlyphInterfacePlatform.instance
-        .displayProgressAndToggle(progress, reverse: reverse);
+    return NothingGlyphInterfacePlatform.instance.displayProgressAndToggle(progress, reverse: reverse);
   }
 
   /// Used to turn off any showing glyph.

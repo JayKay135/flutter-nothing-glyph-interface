@@ -80,3 +80,32 @@ class NothingPhone2a {
   static const int b = 24;
   static const int a = 25;
 }
+
+class NothingPhone2aPlus {
+  static const int c1 = 0;
+  static const int c2 = 1;
+  static const int c3 = 2;
+  static const int c4 = 3;
+  static const int c5 = 4;
+  static const int c6 = 5;
+  static const int c7 = 6;
+  static const int c8 = 7;
+  static const int c9 = 8;
+  static const int c10 = 9;
+  static const int c11 = 10;
+  static const int c12 = 11;
+  static const int c13 = 12;
+  static const int c14 = 13;
+  static const int c15 = 14;
+  static const int c16 = 15;
+  static const int c17 = 16;
+  static const int c18 = 17;
+  static const int c19 = 18;
+  static const int c20 = 19;
+  static const int c21 = 20;
+  static const int c22 = 21;
+  static const int c23 = 22;
+  static const int c24 = 23;
+  static const int b = 24;
+  static const int a = 25;
+}

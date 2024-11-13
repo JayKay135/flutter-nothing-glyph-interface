@@ -1,6 +1,7 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'nothing_glyph_interface_method_channel.dart';
+import '../core/glyph.dart';
 
 abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
   /// Constructs a NothingGlyphInterfacePlatform.
@@ -8,8 +9,7 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static NothingGlyphInterfacePlatform _instance =
-      MethodChannelNothingGlyphInterface();
+  static NothingGlyphInterfacePlatform _instance = MethodChannelNothingGlyphInterface();
 
   /// The default instance of [NothingGlyphInterfacePlatform] to use.
   ///
@@ -32,19 +32,24 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  /// Returns true if the device is a 20111 aka Nothing Phone 1
+  /// Returns true if the device is a 20111 aka [NothingPhone1]
   Future<bool?> is20111() {
     throw UnimplementedError('is20111() has not been implemented.');
   }
 
-  /// Returns true if the device is a 22111 aka Nothing Phone 2
+  /// Returns true if the device is a 22111 aka [NothingPhone2]
   Future<bool?> is22111() {
     throw UnimplementedError('is22111() has not been implemented.');
   }
 
-  /// Returns true if the device is a 23111 aka Nothing Phone 2a
+  /// Returns true if the device is a 23111 aka [NothingPhone2a]
   Future<bool?> is23111() {
     throw UnimplementedError('is23111() has not been implemented.');
+  }
+
+  /// Returns true if the device is a 23111 aka [NothingPhone2aPlus]
+  Future<bool?> is23113() {
+    throw UnimplementedError('is23113() has not been implemented.');
   }
 
   Future<int?> getPeriod() async {
@@ -84,8 +89,7 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
   }
 
   Future<void> displayProgressAndToggle(int progress, {bool reverse = false}) {
-    throw UnimplementedError(
-        'displayProgressAndToggle() has not been implemented.');
+    throw UnimplementedError('displayProgressAndToggle() has not been implemented.');
   }
 
   Future<void> turnOff() {
