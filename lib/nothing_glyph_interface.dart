@@ -1,10 +1,9 @@
 import 'dart:async';
 
+import 'nothing_glyph_interface_platform_interface.dart';
 export '../core/glyph.dart' show NothingPhone1, NothingPhone2, NothingPhone2a;
 export '../core/glyph_frame_builder.dart' show GlyphFrameBuilder;
-
 import '../core/glyph.dart';
-import 'nothing_glyph_interface_platform_interface.dart';
 
 class NothingGlyphInterface {
   /// The controller to update subscribers about the service connection.
