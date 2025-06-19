@@ -2,6 +2,7 @@ package com.JayKayCooperations.nothing_glyph_interface
 
 import android.content.ComponentName
 import android.os.Build
+import android.os.Bundle
 import android.content.Context
 import android.util.Log
 import android.app.Activity
@@ -20,10 +21,10 @@ import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import kotlinx.coroutines.runBlocking
 
-private const val TAG = "NothingGlyphInterfacePlugin"
+private const val TAG = "NothingGlyphInterface"
 
 /** NothingGlyphInterfacePlugin */
-class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
+class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAware  {
   private lateinit var channel: MethodChannel
 	private var flutterPluginBinding: FlutterPlugin.FlutterPluginBinding? = null
 	private var activity: Activity? = null
@@ -45,12 +46,26 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
         runBlocking {
 			try {
 				mGM?.turnOff()
+				mGM?.closeSession()
+				mGM?.unInit()
 			} catch (e: GlyphException) {
 				Log.e(TAG, e.message ?: "Unknown error")
 			} finally {
 				activity = null
 			}
 		}
+	}
+
+	fun destroy() {
+		try {
+			mGM?.turnOff()
+			mGM?.closeSession()
+		} catch (e: GlyphException) {
+			Log.e(TAG, e.message ?: "Unknown error")
+		} finally {
+			mGM?.unInit()
+		}
+
 	}
 
 	override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -61,6 +76,8 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
         runBlocking {
 			try {
 				mGM?.turnOff()
+				mGM?.closeSession()
+				mGM?.unInit()
 			} catch (e: GlyphException) {
 				Log.e(TAG, e.message ?: "Unknown error")
 			} finally {
@@ -73,8 +90,6 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 		init();
 		mGM = GlyphManager.getInstance(applicationContext);
 		mGM?.init(mCallback);
-
-        Log.d(TAG, "Attached to engine.")
   }
 
 	override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
@@ -88,7 +103,8 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 	override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
 		try {
 			mGM?.turnOff()
-			mGM?.closeSession();
+			mGM?.closeSession()
+			mGM?.unInit()
 		} catch (e: GlyphException) {
 			Log.e(TAG, e.message ?: "Unknown error");
 		} finally {
@@ -105,6 +121,7 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 		"is22111" -> result.success(Common.is22111())
 		"is23111" -> result.success(Common.is23111())
 		"is23113" -> result.success(Common.is23113())
+		"is24111" -> result.success(Common.is24111())
 		// Gylph Frame
 		"getPeriod" -> result.success(mFrame?.getPeriod())
 		"getCycles" -> result.success(mFrame?.getCycles())
@@ -112,11 +129,13 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 		"getChannel" -> result.success(mFrame?.getChannel())
 		"init" -> {
 			init();
+			mGM = GlyphManager.getInstance(activity?.applicationContext);
+			mGM?.init(mCallback);
 			result.success(null)
 		}
 		"buildGlyphFrame" -> {
 			val operations = call.argument<List<Map<String, Int?>>>("operations")
-			val builder = mGM?.getGlyphFrameBuilder()
+			val builder = mGM?.glyphFrameBuilder
 			operations?.forEach { operation ->
 				operation.forEach { command, value ->
 					when (command) {
@@ -179,10 +198,12 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 		mCallback =
 			object : GlyphManager.Callback {
 			override fun onServiceConnected(componentName: ComponentName) {
-				if (Common.is20111()) mGM?.register(Common.DEVICE_20111)
-				if (Common.is22111()) mGM?.register(Common.DEVICE_22111)
-				if (Common.is23111()) mGM?.register(Common.DEVICE_23111)
-				if (Common.is23113()) mGM?.register(Common.DEVICE_23113);
+				if (Common.is20111()) mGM?.register(Glyph.DEVICE_20111)
+				if (Common.is22111()) mGM?.register(Glyph.DEVICE_22111)
+				if (Common.is23111()) mGM?.register(Glyph.DEVICE_23111)
+				if (Common.is23113()) mGM?.register(Glyph.DEVICE_23113)
+				if (Common.is24111()) mGM?.register(Glyph.DEVICE_24111)
+
 
 				try {
 					mGM?.openSession()
@@ -196,8 +217,9 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 			override fun onServiceDisconnected(componentName: ComponentName) {
 				mGM?.turnOff()
 				mGM?.closeSession()
+				mGM?.unInit()
 
-    			channel.invokeMethod("serviceConnection", false)
+				channel.invokeMethod("serviceConnection", false)
 			}
 		}
 	}

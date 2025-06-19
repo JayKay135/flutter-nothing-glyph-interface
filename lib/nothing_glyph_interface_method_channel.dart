@@ -20,7 +20,8 @@ class MethodChannelNothingGlyphInterface extends NothingGlyphInterfacePlatform {
         default:
           throw PlatformException(
             code: 'Unimplemented',
-            details: "The glyph_interface plugin for Flutter does not implement the method '${call.method}'",
+            details:
+                "The glyph_interface plugin for Flutter does not implement the method '${call.method}'",
           );
       }
     });
@@ -28,7 +29,8 @@ class MethodChannelNothingGlyphInterface extends NothingGlyphInterfacePlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version =
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
 
@@ -52,6 +54,11 @@ class MethodChannelNothingGlyphInterface extends NothingGlyphInterfacePlatform {
   @override
   Future<bool?> is23113() async {
     return await methodChannel.invokeMethod<bool>('is23113');
+  }
+
+  @override
+  Future<bool?> is24111() async {
+    return await methodChannel.invokeMethod<bool>('is24111');
   }
 
   // Gylph Frame
@@ -83,7 +90,8 @@ class MethodChannelNothingGlyphInterface extends NothingGlyphInterfacePlatform {
 
   @override
   Future<void> buildGlyphFrame(List<Map<String, int?>> operations) async {
-    await methodChannel.invokeMethod('buildGlyphFrame', {'operations': operations});
+    await methodChannel
+        .invokeMethod('buildGlyphFrame', {'operations': operations});
   }
 
   @override
@@ -98,12 +106,15 @@ class MethodChannelNothingGlyphInterface extends NothingGlyphInterfacePlatform {
 
   @override
   Future<void> displayProgress(int progress, {bool reverse = false}) async {
-    await methodChannel.invokeMethod('displayProgress', {'progress': progress, 'reverse': reverse});
+    await methodChannel.invokeMethod(
+        'displayProgress', {'progress': progress, 'reverse': reverse});
   }
 
   @override
-  Future<void> displayProgressAndToggle(int progress, {bool reverse = false}) async {
-    await methodChannel.invokeMethod('displayProgressAndToggle', {'progress': progress, 'reverse': reverse});
+  Future<void> displayProgressAndToggle(int progress,
+      {bool reverse = false}) async {
+    await methodChannel.invokeMethod(
+        'displayProgressAndToggle', {'progress': progress, 'reverse': reverse});
   }
 
   @override

@@ -1,3 +1,7 @@
+## 0.0.8
+
+- Added support for Nothing Phone 3a and 3a Pro
+
 ## 0.0.7
 
 - Added support for Nothing Phone 2a Plus

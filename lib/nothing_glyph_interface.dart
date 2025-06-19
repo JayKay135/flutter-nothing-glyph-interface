@@ -1,13 +1,19 @@
 import 'dart:async';
 
 import 'nothing_glyph_interface_platform_interface.dart';
-export '../core/glyph.dart' show NothingPhone1, NothingPhone2, NothingPhone2a;
+export '../core/glyph.dart'
+    show
+        NothingPhone1,
+        NothingPhone2,
+        NothingPhone2a,
+        NothingPhone2aPlus,
+        NothingPhone3a;
 export '../core/glyph_frame_builder.dart' show GlyphFrameBuilder;
-import '../core/glyph.dart';
 
 class NothingGlyphInterface {
   /// The controller to update subscribers about the service connection.
-  final StreamController<bool> _onServiceConnectionController = StreamController<bool>();
+  final StreamController<bool> _onServiceConnectionController =
+      StreamController<bool>();
 
   /// Subscribable stream to listen for service connection events.
   Stream<bool> get onServiceConnection => _onServiceConnectionController.stream;
@@ -48,6 +54,11 @@ class NothingGlyphInterface {
   /// Returns true if the device is a 23113 aka [NothingPhone2aPlus].
   Future<bool?> is23113() {
     return NothingGlyphInterfacePlatform.instance.is23113();
+  }
+
+  /// Returns true if the device is a is24111 aka [NothingPhone3a] and NothingPhone3aPro.
+  Future<bool?> is24111() {
+    return NothingGlyphInterfacePlatform.instance.is24111();
   }
 
   /// Get the duration of the GlyphFrame is to be turned on, measured in milliseconds.
@@ -101,7 +112,8 @@ class NothingGlyphInterface {
   ///
   /// Limited to D1 only for [NothingPhone1].
   Future<void> displayProgress(int progress, {bool reverse = false}) {
-    return NothingGlyphInterfacePlatform.instance.displayProgress(progress, reverse: reverse);
+    return NothingGlyphInterfacePlatform.instance
+        .displayProgress(progress, reverse: reverse);
   }
 
   /// Used to simultaneously toggle all Glyphs except C1 / D1 and display the progress value on C1 / D1.
@@ -110,7 +122,8 @@ class NothingGlyphInterface {
   ///
   /// Limited to D1 only for [NothingPhone1].
   Future<void> displayProgressAndToggle(int progress, {bool reverse = false}) {
-    return NothingGlyphInterfacePlatform.instance.displayProgressAndToggle(progress, reverse: reverse);
+    return NothingGlyphInterfacePlatform.instance
+        .displayProgressAndToggle(progress, reverse: reverse);
   }
 
   /// Used to turn off any showing glyph.

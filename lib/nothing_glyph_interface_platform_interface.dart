@@ -9,7 +9,8 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static NothingGlyphInterfacePlatform _instance = MethodChannelNothingGlyphInterface();
+  static NothingGlyphInterfacePlatform _instance =
+      MethodChannelNothingGlyphInterface();
 
   /// The default instance of [NothingGlyphInterfacePlatform] to use.
   ///
@@ -47,9 +48,14 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
     throw UnimplementedError('is23111() has not been implemented.');
   }
 
-  /// Returns true if the device is a 23111 aka [NothingPhone2aPlus]
+  /// Returns true if the device is a 23113 aka [NothingPhone2aPlus]
   Future<bool?> is23113() {
     throw UnimplementedError('is23113() has not been implemented.');
+  }
+
+  /// Returns true if the device is a is24111 aka [NothingPhone3a] and NothingPhone3aPro
+  Future<bool?> is24111() {
+    throw UnimplementedError('is24111() has not been implemented.');
   }
 
   Future<int?> getPeriod() async {
@@ -89,7 +95,8 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
   }
 
   Future<void> displayProgressAndToggle(int progress, {bool reverse = false}) {
-    throw UnimplementedError('displayProgressAndToggle() has not been implemented.');
+    throw UnimplementedError(
+        'displayProgressAndToggle() has not been implemented.');
   }
 
   Future<void> turnOff() {
