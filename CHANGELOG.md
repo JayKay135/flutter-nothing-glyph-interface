@@ -1,3 +1,7 @@
+## 0.0.9
+
+- Updated KetchumSDK_Community jar
+
 ## 0.0.8
 
 - Added support for Nothing Phone 3a and 3a Pro

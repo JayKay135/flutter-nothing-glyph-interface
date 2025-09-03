@@ -53,7 +53,7 @@ android {
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
         testImplementation 'org.mockito:mockito-core:5.14.1'
         implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
-        implementation files('src/main/libs/KetchumSDK_Community_20250319.jar')
+        implementation files('src/main/libs/KetchumSDK_Community_20250805.jar')
         implementation 'androidx.appcompat:appcompat:1.7.0'
     }
 
