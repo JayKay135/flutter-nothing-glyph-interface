@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'nothing_glyph_interface_platform_interface.dart';
+import 'core/glyph.dart';
 export '../core/glyph.dart'
     show
         NothingPhone1,

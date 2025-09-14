@@ -1,6 +1,8 @@
 import 'glyph.dart';
 
+/// Builder class for creating a GlyphFrame configuration.
 class GlyphFrameBuilder {
+  /// List of operations to be performed for building the GlyphFrame.
   final List<Map<String, int?>> _operations = [];
 
   /// Set the duration of the GlyphFrame is to be turned on, measured in milliseconds.

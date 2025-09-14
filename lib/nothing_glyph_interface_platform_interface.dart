@@ -58,18 +58,22 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
     throw UnimplementedError('is24111() has not been implemented.');
   }
 
+  /// Returns the duration of the GlyphFrame is to be turned on, measured in milliseconds.
   Future<int?> getPeriod() async {
     throw UnimplementedError('getPeriod() has not been implemented.');
   }
 
+  /// Returns the number of cycles the GlyphFrame is to be turned on for.
   Future<int?> getCycles() async {
     throw UnimplementedError('getCycles() has not been implemented.');
   }
 
+  /// Returns the interval between cycles.
   Future<int?> getInterval() async {
     throw UnimplementedError('getInterval() has not been implemented.');
   }
 
+  /// Returns the array of Glyph channels that are included in the GlyphFrame.
   Future<List<int>?> getChannel() async {
     throw UnimplementedError('getChannel() has not been implemented.');
   }
@@ -78,27 +82,41 @@ abstract class NothingGlyphInterfacePlatform extends PlatformInterface {
     throw UnimplementedError('init() has not been implemented.');
   }
 
+  /// Allows the user to build more complex GlyphFrames.
   Future<void> buildGlyphFrame(List<Map<String, int?>> operations) {
     throw UnimplementedError('buildGlyphFrame() has not been implemented.');
   }
 
+  /// Used to enable/disable the channels set in the GlyphFrame.
   Future<void> toggle() {
     throw UnimplementedError('toggle() has not been implemented.');
   }
 
+  /// Used for animating a breathing animation using the parameters of channels, period, and interval set in the GlyphFrame.
   Future<void> animate() {
     throw UnimplementedError('animate() has not been implemented.');
   }
 
+  /// Used to display a progress value on C1 / D1.
+  ///
+  /// [progress] : Value between 0 and 100.
+  ///
+  /// Limited to D1 only for [NothingPhone1].
   Future<void> displayProgress(int progress, {bool reverse = false}) {
     throw UnimplementedError('displayProgress() has not been implemented.');
   }
 
+  /// Used to simultaneously toggle all Glyphs except C1 / D1 and display the progress value on C1 / D1.
+  ///
+  /// [progress] : Value between 0 and 100.
+  ///
+  /// Limited to D1 only for [NothingPhone1].
   Future<void> displayProgressAndToggle(int progress, {bool reverse = false}) {
     throw UnimplementedError(
         'displayProgressAndToggle() has not been implemented.');
   }
 
+  /// Used to turn off any showing glyph.
   Future<void> turnOff() {
     throw UnimplementedError('turnOff() has not been implemented.');
   }

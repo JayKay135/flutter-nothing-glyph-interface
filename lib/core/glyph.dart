@@ -15,6 +15,7 @@ class NothingPhone1 {
   static const int d1_8 = 14;
   static const int e1 = 6;
 
+  /// Map of glyph constants to their string representation.
   static Map<int, String> glyphs = {
     a1: 'a1',
     b1: 'b1',
@@ -69,6 +70,7 @@ class NothingPhone2 {
   static const int d1_8 = 32;
   static const int e1 = 24;
 
+  /// Map of glyph constants to their string representation.
   static const Map<int, String> glyphs = {
     a1: 'a1',
     a2: 'a2',
@@ -134,6 +136,7 @@ class NothingPhone2a {
   static const int b = 24;
   static const int a = 25;
 
+  /// Map of glyph constants to their string representation.
   static const Map<int, String> glyphs = {
     c1: 'c1',
     c2: 'c2',
@@ -192,6 +195,7 @@ class NothingPhone2aPlus {
   static const int b = 24;
   static const int a = 25;
 
+  /// Map of glyph constants to their string representation.
   static const Map<int, String> glyphs = {
     c1: 'c1',
     c2: 'c2',
@@ -260,6 +264,7 @@ class NothingPhone3a {
   static const int b4 = 34;
   static const int b5 = 35;
 
+  /// Map of glyph constants to their string representation.
   static const Map<int, String> glyphs = {
     c1: 'c1',
     c2: 'c2',
