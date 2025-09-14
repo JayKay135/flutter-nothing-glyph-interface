@@ -40,13 +40,14 @@ Create a `NothingGlyphInterface` instance:
 NothingGlyphInterface _nothingGlyphInterface = NothingGlyphInterface();
 ```
 
-Check if the Android device is a Nothing Phone 1, Phone 2, Phone 2a or Phone 2a Plus:
+Check if the Android device is a Nothing Phone 1, Phone 2, Phone 2a, Phone 2a Plus, Phone 3a or Phone 3a Pro:
 
 ```dart
 bool isPhone1 = await _nothingGlyphInterface.is20111();
 bool isPhone2 = await _nothingGlyphInterface.is22111();
 bool isPhone2a = await _nothingGlyphInterface.is23111();
 bool isPhone2aPlus = await _nothingGlyphInterface.is23113();
+bool isPhone3aOrPhone3aPro = await _nothingGlyphInterface.is24111();
 ```
 
 Listen to the Glyph connection stream.
