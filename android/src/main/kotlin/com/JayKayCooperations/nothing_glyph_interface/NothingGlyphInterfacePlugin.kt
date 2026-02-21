@@ -180,7 +180,7 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 		}
 		"displayProgressAndToggle" -> {
 			if (mFrame != null) {
-				mGM?.displayProgress(mFrame, call.argument<Int>("progress")!!, call.argument<Boolean>("reverse") ?: false)
+				mGM?.displayProgressAndToggle(mFrame, call.argument<Int>("progress")!!, call.argument<Boolean>("reverse") ?: false)
 				result.success(null)
 			} else {
 				result.error("NULL_FRAME", "mFrame is null", null)
