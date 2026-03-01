@@ -1,3 +1,7 @@
+## 0.0.10
+
+- Resolved incorrect method call for displayProgressAndToggle
+
 ## 0.0.9
 
 - Updated KetchumSDK_Community jar
