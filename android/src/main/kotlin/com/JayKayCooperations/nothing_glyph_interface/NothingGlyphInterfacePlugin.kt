@@ -19,7 +19,6 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-import kotlinx.coroutines.runBlocking
 
 private const val TAG = "NothingGlyphInterface"
 
@@ -34,62 +33,63 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 
 	private var mFrame: GlyphFrame? = null
 
-	override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-		activity = binding.activity
+	// Whether the Glyph service is bound. GlyphManager.unInit() is a bare
+	// unbindService(), and a second call throws IllegalArgumentException
+	// ("Service not registered"). The detach callbacks below each used to
+	// call it, so destroying the activity crashed the app (#10).
+	private var mBound = false
 
+	private fun bind(context: Context?) {
 		init();
-		mGM = GlyphManager.getInstance(activity?.applicationContext);
+		mGM = GlyphManager.getInstance(context);
 		mGM?.init(mCallback);
+		mBound = true
 	}
 
-	override fun onDetachedFromActivity() {
-        runBlocking {
-			try {
-				mGM?.turnOff()
-				mGM?.closeSession()
-				mGM?.unInit()
-			} catch (e: GlyphException) {
-				Log.e(TAG, e.message ?: "Unknown error")
-			} finally {
-				activity = null
-			}
-		}
-	}
-
-	fun destroy() {
+	/** Turns the Glyphs off and unbinds the service, once per bind. */
+	private fun release() {
+		if (!mBound) return
+		mBound = false
 		try {
 			mGM?.turnOff()
 			mGM?.closeSession()
 		} catch (e: GlyphException) {
 			Log.e(TAG, e.message ?: "Unknown error")
-		} finally {
-			mGM?.unInit()
 		}
+		try {
+			mGM?.unInit()
+		} catch (e: IllegalArgumentException) {
+			Log.w(TAG, "Glyph service already unbound: ${e.message}")
+		}
+	}
 
+	override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+		activity = binding.activity
+		bind(activity?.applicationContext)
+	}
+
+	override fun onDetachedFromActivity() {
+		release()
+		activity = null
+	}
+
+	fun destroy() {
+		release()
 	}
 
 	override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
 		activity = binding.activity
+		// The config-change detach released the service: bind it again
+		bind(activity?.applicationContext)
 	}
 
 	override fun onDetachedFromActivityForConfigChanges() {
-        runBlocking {
-			try {
-				mGM?.turnOff()
-				mGM?.closeSession()
-				mGM?.unInit()
-			} catch (e: GlyphException) {
-				Log.e(TAG, e.message ?: "Unknown error")
-			} finally {
-				activity = null
-			}
-		}
+		release()
+		activity = null
 	}
 	
 	private fun onAttach(applicationContext: Context){
-		init();
-		mGM = GlyphManager.getInstance(applicationContext);
-		mGM?.init(mCallback);
+		bind(applicationContext)
   }
 
 	override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
@@ -102,13 +102,8 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 
 	override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
 		try {
-			mGM?.turnOff()
-			mGM?.closeSession()
-			mGM?.unInit()
-		} catch (e: GlyphException) {
-			Log.e(TAG, e.message ?: "Unknown error");
+			release()
 		} finally {
-			mGM?.unInit()
 			channel.setMethodCallHandler(null)
 		}
 	}
@@ -128,9 +123,7 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 		"getInterval" -> result.success(mFrame?.getInterval())
 		"getChannel" -> result.success(mFrame?.getChannel())
 		"init" -> {
-			init();
-			mGM = GlyphManager.getInstance(activity?.applicationContext);
-			mGM?.init(mCallback);
+			bind(activity?.applicationContext)
 			result.success(null)
 		}
 		"buildGlyphFrame" -> {
@@ -215,9 +208,7 @@ class NothingGlyphInterfacePlugin: FlutterPlugin, MethodCallHandler, ActivityAwa
 			}
 
 			override fun onServiceDisconnected(componentName: ComponentName) {
-				mGM?.turnOff()
-				mGM?.closeSession()
-				mGM?.unInit()
+				release()
 
 				channel.invokeMethod("serviceConnection", false)
 			}
